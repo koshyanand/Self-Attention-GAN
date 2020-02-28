@@ -49,7 +49,7 @@ class Generator(nn.Module):
         layer2 = []
         layer3 = []
         last = []
-
+        
         repeat_num = int(np.log2(self.imsize)) - 3
         mult = 2 ** repeat_num # 8
         layer1.append(SpectralNorm(nn.ConvTranspose2d(z_dim, conv_dim * mult, 4)))
