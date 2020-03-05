@@ -101,7 +101,7 @@ class Trainer(object):
             # Compute loss with real images
             # dr1, dr2, df1, df2, gf1, gf2 are attention scores
             real_images = tensor2var(real_images)
-            d_out_real,dr1,dr2,dr3 = self.D(real_images)
+            d_out_real,dr1,dr2 = self.D(real_images)
             if self.adv_loss == 'wgan-gp':
                 d_loss_real = - torch.mean(d_out_real)
             elif self.adv_loss == 'hinge':
@@ -110,7 +110,7 @@ class Trainer(object):
             # apply Gumbel Softmax
             z = tensor2var(torch.randn(real_images.size(0), self.z_dim))
             fake_images,gf1,gf2 = self.G(z)
-            d_out_fake,df1,df2,df3 = self.D(fake_images)
+            d_out_fake,df1,df2 = self.D(fake_images)
 
             if self.adv_loss == 'wgan-gp':
                 d_loss_fake = d_out_fake.mean()
